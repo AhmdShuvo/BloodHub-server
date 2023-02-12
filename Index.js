@@ -18,7 +18,7 @@ app.use(express.json())
 app.use(cors())
 
 
-const uri = `mongodb+srv://BloodHub-USER:qcHI5J6HTZyTgm2i@cluster0.0qtlc.mongodb.net/?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.0qtlc.mongodb.net/?retryWrites=true&w=majority`;
 // const uri = `mongodb+srv://RideAndDrive-server:FRgSLMuoMbRVR1x2@cluster0.0qtlc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 
  const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });

@@ -3,11 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node":"19.x"
+  },
 
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app/index.js",
-    "start-dev":"nodemon api/index.js"
+    "start": "node index.js",
+    "start-dev":"nodemon index.js"
   },
   "keywords": [],
   "author": "",

@@ -27,6 +27,7 @@ async function run() {
     await client.connect();
     const database = client.db('bloodHub');
     const donorsCollecton = database.collection('Donors');
+    const ratingsCollection = database.collection('Ratings');
     // Query for a movie that has the title 'Back to the Future'
 
 
@@ -44,6 +45,11 @@ async function run() {
       const result= await donors.toArray()
       res.json(result);
     })
+    app.get('/ratings', async(req,res)=>{
+    const ratings=d=ratingsCollection.find({});
+    const result= await ratings.toArray();
+    res.json(result)
+    })
 
     app.get("/user/:email",async(req,res)=>{
       const userEmail=req.params.email;
@@ -53,6 +59,7 @@ async function run() {
       const result=await cursor.toArray()
       res.json(result);
    })
+  
 
    app.put('/donor/:id',async (req,res)=>{
     const id=req.params;

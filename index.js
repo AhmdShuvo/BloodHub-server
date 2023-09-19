@@ -79,6 +79,24 @@ async function run() {
   
     const result= await donorsCollecton.updateOne(filter,updateDoc,options)
    })
+      //  change pending to approved//
+      app.put("/status/donor/:id",async(req,res)=>{
+        const id=req.params.id;
+    
+       const filter={_id: Objectid(id)}
+       console.log(id);
+       const options = { upsert: true }; 
+       const updateDoc = {
+        $set: {
+          status: "Active"
+        },
+        
+      
+      }
+      const result= await donorsCollecton.updateOne(filter,updateDoc,options)
+      res.send(result)
+      
+    })
 
   } finally {
     // Ensures that the client will close when you finish/error
@@ -95,6 +113,7 @@ run().catch(console.dir);
          
 
   })
+
 
   app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)

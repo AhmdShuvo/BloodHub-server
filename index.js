@@ -39,7 +39,25 @@ async function run() {
     
         res.send(result)
     });
-
+    app.put('/donors/:email',async(req,res)=>{
+     const email=req.params.email;
+      const filter={email:email}
+     
+      const options = { upsert: true };
+      console.log(email);
+    
+      const updateDoc = {
+        $set: {
+          role: "admin"
+        },
+      };
+    
+      const result=await donorsCollecton.updateOne(filter,updateDoc,options);
+    
+    res.json(result)
+     
+    })
+    
     app.get('/donors', async (req,res)=>{
       const donors= donorsCollecton.find({});
       const result= await donors.toArray()
@@ -78,6 +96,15 @@ async function run() {
    };
   
     const result= await donorsCollecton.updateOne(filter,updateDoc,options)
+   })
+
+   app.delete("/donor/delete/:id",async (req,res)=>{
+    const id =req.params.id;
+    const query = { _id: Objectid(id) }
+
+    const result = await donorsCollecton.deleteOne(query);
+
+    res.send(result)
    })
       //  change pending to approved//
       app.put("/status/donor/:id",async(req,res)=>{
